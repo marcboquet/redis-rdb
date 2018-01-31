@@ -14,6 +14,8 @@ module RDB
   end
 
   module Opcode
+    AUX = 250
+    RESIZEDB = 251
     EXPIRETIME_MS = 252
     EXPIRETIME = 253
     SELECTDB = 254

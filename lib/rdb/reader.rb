@@ -36,6 +36,16 @@ module RDB
             callbacks.start_database(state.database)
             next
 
+          when Opcode::AUX
+            aux_key = read_string(rdb)
+            aux_val = read_string(rdb)
+            next
+
+          when Opcode::RESIZEDB
+            db_size = read_length(rdb).first
+            expire_size = read_length(rdb).first
+            next
+
           when Opcode::EOF
             callbacks.end_database(state.database) unless state.database.nil?
             callbacks.end_rdb()
@@ -65,7 +75,7 @@ module RDB
         signature, version = rdb_header[0..4], rdb_header[5..9].to_i
 
         raise ReaderError, 'Wrong signature trying to load DB from file' if signature != 'REDIS'
-        raise ReaderError, "Can't handle RDB format version #{version}" if version < 1 or version > 6
+        raise ReaderError, "Can't handle RDB format version #{version}" if version < 1 or version > 7
 
         version
       end
