@@ -39,11 +39,15 @@ module RDB
           when Opcode::AUX
             aux_key = read_string(rdb)
             aux_val = read_string(rdb)
+            # TODO: callback
+            # https://github.com/sripathikrishnan/redis-rdb-tools/blob/c02b41041979268ee08131f0a239b1d9f89e9040/rdbtools/parser.py#L379
             next
 
           when Opcode::RESIZEDB
             db_size = read_length(rdb).first
             expire_size = read_length(rdb).first
+            # TODO: callback
+            # https://github.com/sripathikrishnan/redis-rdb-tools/blob/c02b41041979268ee08131f0a239b1d9f89e9040/rdbtools/parser.py#L387
             next
 
           when Opcode::EOF

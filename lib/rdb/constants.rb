@@ -33,5 +33,8 @@ module RDB
     SET_INTSET = 11
     ZSET_ZIPLIST = 12
     HASH_ZIPLIST = 13
+    # TODO:
+    # # https://github.com/sripathikrishnan/redis-rdb-tools/blob/c02b41041979268ee08131f0a239b1d9f89e9040/rdbtools/parser.py#L523-L524
+    LIST_QUICKLIST = 14
   end
 end
